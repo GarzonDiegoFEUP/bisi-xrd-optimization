@@ -26,12 +26,12 @@ COLOR_TARGET = COLORBLIND[2]     # green
 COLOR_IMPURITY = COLORBLIND[1]   # orange
 COLOR_UNMATCHED = COLORBLIND[3]  # reddish pink
 REFERENCE_COLORS = {
-    "BaCu2Se2": COLORBLIND[2],
-    "Cu2Se": COLORBLIND[1],
-    "BaSeO3": COLORBLIND[9],  # sky blue (avoids hard-to-see yellow)
+    "BiSI": COLORBLIND[2],
+    "BiOI": COLORBLIND[1],
+    "Bi2O3": COLORBLIND[9],
+    "Bi2S3": COLORBLIND[4],
+    "BiI3": COLORBLIND[5],
 }
-# Only these phases are drawn as reference bars (BaSe/BaSeO4 stay matched in
-# purity but are hidden from plots, per project convention).
 PLOT_PHASES = tuple(REFERENCE_COLORS)
 # Legend entries for detected-peak markers only (reference cards get their own).
 MATCH_LEGEND = (
@@ -58,11 +58,11 @@ def _clip_x_to_data(axis: plt.Axes, spectra: list[Any]) -> tuple[float, float] |
 def _phase_label(phase: str) -> str:
     """Render a phase key as a formatted chemical formula."""
     formulas = {
-        "BaCu2Se2": "$\\alpha$-BaCu$_2$Se$_2$",
-        "Cu2Se": "Cu$_2$Se",
-        "BaSe": "BaSe",
-        "BaSeO4": "BaSeO$_4$",
-        "BaSeO3": "BaSeO$_3$",
+        "BiSI": "BiSI",
+        "BiOI": "BiOI",
+        "Bi2O3": "Bi$_2$O$_3$",
+        "Bi2S3": "Bi$_2$S$_3$",
+        "BiI3": "BiI$_3$",
     }
     return formulas.get(phase, phase)
 
@@ -213,7 +213,7 @@ def plot_xrd_series(
             offset = float(index)
             axis.plot(theta, spectrum / scale + offset, color=COLOR_SCAN, linewidth=0.9)
             for key, color, marker, label in (
-                ("target", COLOR_TARGET, "*", f"{_phase_label('BaCu2Se2')} match"),
+                ("target", COLOR_TARGET, "*", f"{_phase_label('BiSI')} match"),
                 ("impurity", COLOR_IMPURITY, "s", "impurity match"),
                 ("unmatched", COLOR_UNMATCHED, "^", "unmatched peak"),
             ):
@@ -278,7 +278,7 @@ def plot_xrd_series(
         safe_series = re.sub(r"[^A-Za-z0-9_.-]+", "_", series)
         output_dir.mkdir(parents=True, exist_ok=True)
         figure.savefig(
-            output_dir / f"bacuse2_xrd_series_{safe_series}.png",
+            output_dir / f"bisi_xrd_series_{safe_series}.png",
             dpi=150,
             bbox_inches="tight",
         )

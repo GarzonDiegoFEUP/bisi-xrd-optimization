@@ -1,4 +1,4 @@
-"""NOMAD Oasis REST API client for BaCuSe data extraction.
+"""NOMAD Oasis REST API client for BiSI data extraction.
 
 Reads credentials from the repository-root .env file (NOMAD_API_URL, NOMAD_PAT).
 The local archive helpers in nomad_client.py remain the offline fallback; this
@@ -19,7 +19,7 @@ from .config import PROJECT_ROOT
 DEFAULT_API_URL = "https://nomad-sadewasser.inl.local/nomad-oasis/api/v1"
 REQUEST_TIMEOUT = 30
 
-BACUSE_ELEMENTS = ("Ba", "Cu", "Se")
+BISI_ELEMENTS = ("Bi", "S", "I")
 XRDML_SUFFIX = ".xrdml"
 
 
@@ -113,11 +113,11 @@ def query_entries(
         request_body["pagination"]["page_after_value"] = next_value
 
 
-def query_bacuse_entries(
+def query_bisi_entries(
     api_url: str | None = None,
     token: str | None = None,
 ) -> list[dict[str, Any]]:
-    """Return all entries whose normalized material contains Ba, Cu, and Se."""
+    """Return entries whose normalized material contains Bi, S, and I."""
     include = [
         "entry_id",
         "upload_id",
@@ -129,7 +129,7 @@ def query_bacuse_entries(
     ]
     entries = list(
         query_entries(
-            query={"results.material.elements": {"all": list(BACUSE_ELEMENTS)}},
+            query={"results.material.elements": {"all": list(BISI_ELEMENTS)}},
             include=include,
             api_url=api_url,
             token=token,
@@ -221,8 +221,8 @@ def save_xrdml_from_zip(zip_bytes: bytes, output_dir: Path) -> list[Path]:
 
 
 def load_upload_ids(ids_path: Path | None = None) -> list[str]:
-    """Read BaCuSe upload IDs from data/processed/bacuse_upload_ids.txt."""
-    path = ids_path or (PROJECT_ROOT / "data" / "processed" / "bacuse_upload_ids.txt")
+    """Read BiSI upload IDs from data/processed/bisi_upload_ids.txt."""
+    path = ids_path or (PROJECT_ROOT / "data" / "processed" / "bisi_upload_ids.txt")
     if not path.is_file():
         raise NomadAPIError(f"Upload-ID list not found: {path}")
     ids = []
@@ -232,7 +232,7 @@ def load_upload_ids(ids_path: Path | None = None) -> list[str]:
         if token_line:
             ids.append(token_line.split()[0])
     if not ids:
-        raise NomadAPIError(f"No upload IDs in {path}. Paste the BaCuSe upload IDs there.")
+        raise NomadAPIError(f"No upload IDs in {path}. Add the BiSI upload IDs there.")
     return ids
 
 

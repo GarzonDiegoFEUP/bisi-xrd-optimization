@@ -1,0 +1,535 @@
+{
+  "260430C1": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "warning",
+      "code": "HIGH_CORRELATION",
+      "message": "Correlated pair: instrument.profile.x ~ instrument.profile.y (\u03c1=-0.998). Flagged in stages: profile, closing.",
+      "where": [
+        "instrument.profile.x",
+        "instrument.profile.y"
+      ],
+      "suggestion": "Fix one of the two at a known value, or free them in separate stages.",
+      "value": -0.9979706432463958
+    },
+    {
+      "level": "warning",
+      "code": "HIGH_CORRELATION",
+      "message": "Correlated pair: instrument.profile.v ~ instrument.profile.w (\u03c1=-0.985). Flagged in stages: profile, closing.",
+      "where": [
+        "instrument.profile.v",
+        "instrument.profile.w"
+      ],
+      "suggestion": "Fix one of the two at a known value, or free them in separate stages.",
+      "value": -0.9854676741437047
+    },
+    {
+      "level": "warning",
+      "code": "HIGH_CORRELATION",
+      "message": "Correlated pair: instrument.profile.u ~ instrument.profile.v (\u03c1=-0.982). Flagged in stages: profile, closing.",
+      "where": [
+        "instrument.profile.u",
+        "instrument.profile.v"
+      ],
+      "suggestion": "Fix one of the two at a known value, or free them in separate stages.",
+      "value": -0.9819436976012889
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation reached the cap of 3 passes with Rwp still falling. Pass 3 of 3 was kept (Rwp % per pass: 31.272, 20.312, 20.172).",
+      "where": [],
+      "suggestion": "Raise plan.lebail_passes, or continue from this state with another fit().",
+      "value": 0.2017173028652188
+    }
+  ],
+  "260430C2": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 9 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 9; instrument.profile Lorentzian (phases.1): 9; instrument.profile Lorentzian (phases.2): 9; instrument.profile Lorentzian (phases.3): 9; instrument.profile Lorentzian (phases.4): 9) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 24.307, 23.346, 25.105).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.2334615118853667
+    }
+  ],
+  "260528G4": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 13 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 13; instrument.profile Lorentzian (phases.1): 13; instrument.profile Lorentzian (phases.2): 13; instrument.profile Lorentzian (phases.3): 13; instrument.profile Lorentzian (phases.4): 13) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.2171\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.3 from the 0.8436\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.2574222208616648
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation reached the cap of 3 passes with Rwp still falling. Pass 3 of 3 was kept (Rwp % per pass: 15.311, 14.083, 13.904).",
+      "where": [],
+      "suggestion": "Raise plan.lebail_passes, or continue from this state with another fit().",
+      "value": 0.1390388516487654
+    }
+  ],
+  "260529G5": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "warning",
+      "code": "RESOLUTION_NOT_POSITIVE",
+      "message": "The Lorentzian instrument width (1530 of 2500 fitted points, worst \u0393_L -1.79e-01\u00b0 at 59.990\u00b0 2\u03b8) goes negative inside the fitted range.",
+      "where": [
+        "instrument.profile.x",
+        "instrument.profile.y"
+      ],
+      "suggestion": "Refit the resolution on a standard with its certified cell held fixed (lab_calibrate), or hold a loaded instrument profile instead of refining its widths on this pattern. Do not report the widths, or the microstructure derived from them.",
+      "value": -0.1786517927230096
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 1 of 2 was kept (Rwp % per pass: 18.426, 18.429).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.1842635553000309
+    }
+  ],
+  "260529G6": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 11 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 11; instrument.profile Lorentzian (phases.1): 11; instrument.profile Lorentzian (phases.2): 11; instrument.profile Lorentzian (phases.3): 11; instrument.profile Lorentzian (phases.4): 11) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.2660\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.3 from the 0.9396\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.2831055748152624
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation reached the cap of 3 passes with Rwp still falling. Pass 3 of 3 was kept (Rwp % per pass: 16.337, 15.566, 15.269).",
+      "where": [],
+      "suggestion": "Raise plan.lebail_passes, or continue from this state with another fit().",
+      "value": 0.15268692425185124
+    }
+  ],
+  "260529G7": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 10 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 10; instrument.profile Lorentzian (phases.1): 10; instrument.profile Lorentzian (phases.2): 10; instrument.profile Lorentzian (phases.3): 10; instrument.profile Lorentzian (phases.4): 10) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0222\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.5789\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.038351182914999914
+    },
+    {
+      "level": "warning",
+      "code": "PATTERN_UNDERSAMPLED",
+      "message": "The median fitted peak spans 1.1 steps across its FWHM (19 peaks), below the 5 the guidelines ask for.",
+      "where": [],
+      "suggestion": "Re-collect at a step near FWHM/5 if the intensities must be quotable.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 22.216, 22.182, 22.465).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.2218199822413812
+    }
+  ],
+  "260609A1": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0221\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.7752\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.02851165341294842
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 21.945, 21.780, 22.108).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.2177960957982211
+    }
+  ],
+  "260609A2": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 7 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 7; instrument.profile Lorentzian (phases.1): 7; instrument.profile Lorentzian (phases.2): 7; instrument.profile Lorentzian (phases.3): 7; instrument.profile Lorentzian (phases.4): 7) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0219\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.5295\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.04136400790751854
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 21.364, 21.061, 21.622).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.2106138986338228
+    }
+  ],
+  "260609A3": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 9 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 9; instrument.profile Lorentzian (phases.1): 9; instrument.profile Lorentzian (phases.2): 9; instrument.profile Lorentzian (phases.3): 9; instrument.profile Lorentzian (phases.4): 9) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0291\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.5818\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.0499638307871196
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 19.619, 19.387, 19.775).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.19387252387992066
+    }
+  ],
+  "260609A4": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 8 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 8; instrument.profile Lorentzian (phases.1): 8; instrument.profile Lorentzian (phases.2): 8; instrument.profile Lorentzian (phases.3): 8; instrument.profile Lorentzian (phases.4): 8) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0235\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.8093\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.029095981713523508
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 20.331, 20.132, 20.448).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.20132338650317638
+    }
+  ],
+  "260609A5": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0212\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.5324\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.03976613465764316
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 1 of 2 was kept (Rwp % per pass: 23.760, 27.568).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.2375950143884759
+    }
+  ],
+  "260609B1": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 8 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 8; instrument.profile Lorentzian (phases.1): 8; instrument.profile Lorentzian (phases.2): 8; instrument.profile Lorentzian (phases.3): 8; instrument.profile Lorentzian (phases.4): 8) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "PEAK_WIDTH_LAW_MISMATCH",
+      "message": "The measured FWHM of 0.0232\u00b0 (median of the 12 most prominent lines) differs by a factor of 0.0 from the 0.5862\u00b0 that the fitted widths of phase 0 (BiSI, the closest of the model's phases) give.",
+      "where": [
+        "phases.0",
+        "instrument.profile"
+      ],
+      "suggestion": "Read SIZE_UNUSUALLY_SMALL, STRAIN_UNUSUALLY_LARGE and BOUND_HIT for a width term that ran away, then check that instrument.profile is not broader than this diffractometer.",
+      "value": 0.03959879943556823
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 21.232, 20.872, 21.345).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.20871672142728118
+    }
+  ],
+  "260609B2": [
+    {
+      "level": "warning",
+      "code": "SPECIES_FALLBACK_NEUTRAL",
+      "message": "'S2-' is absent from the Waasmaier-Kirfel table and was scattered as neutral S, with 16 electrons against the ion's 18 (-11.1%).",
+      "where": [
+        "phases.0.atoms.1.species",
+        "phases.3.atoms.2.species",
+        "phases.3.atoms.3.species",
+        "phases.3.atoms.4.species"
+      ],
+      "suggestion": "Accept neutral S as the model, or substitute a tabulated ion of the same element with a nearby charge as a deliberate approximation.",
+      "value": -0.11113199999999995
+    },
+    {
+      "level": "warning",
+      "code": "HIGH_CORRELATION",
+      "message": "Correlated pair: instrument.profile.x ~ instrument.profile.y (\u03c1=-0.980).",
+      "where": [
+        "instrument.profile.x",
+        "instrument.profile.y"
+      ],
+      "suggestion": "Fix one of the two at a known value, or free them in separate stages.",
+      "value": -0.9804040430254978
+    },
+    {
+      "level": "info",
+      "code": "CONSTRAINT_ACTIVE",
+      "message": "The bounded-LM driver held 10 step(s) on a linear inequality constraint (instrument.profile Lorentzian (phases.0): 10; instrument.profile Lorentzian (phases.1): 10; instrument.profile Lorentzian (phases.2): 10; instrument.profile Lorentzian (phases.3): 10; instrument.profile Lorentzian (phases.4): 10) in stage 'closing'.",
+      "where": [],
+      "suggestion": "Vary the starting seed and quote the values only if they survive. At some reflection the data asked for no Gaussian width (the \u0393_G\u00b2 floor, 1e-8 deg\u00b2), so U, V, W and the phase's Gaussian size and strain describe that floor.",
+      "value": null
+    },
+    {
+      "level": "warning",
+      "code": "LEBAIL_ALTERNATION_STOPPED",
+      "message": "The Le Bail alternation stopped at the first pass that did not lower Rwp. Pass 2 of 3 was kept (Rwp % per pass: 18.505, 17.741, 18.024).",
+      "where": [],
+      "suggestion": "Check the cell and the background before you read the kept pass.",
+      "value": 0.17740538003263429
+    }
+  ]
+}

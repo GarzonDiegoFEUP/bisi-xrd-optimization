@@ -11,4 +11,4 @@ xrd_bo_env/
 .env
 
 # Local cache of NOMAD archives (re-downloadable via notebook 1)
-data/raw/nomad_staging/
+data/raw/bisi_nomad_staging/

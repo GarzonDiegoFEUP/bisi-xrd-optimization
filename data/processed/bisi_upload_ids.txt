@@ -1,0 +1,8 @@
+# NOMAD upload IDs for BiSI uploads (one per line).
+# Lines starting with # are ignored. Format: <upload_id>  # optional comment
+HnDaDBQhT1a7IPwy5NoSOg  # BiSI upload provided for extraction
+2tOvLUxsRtury97EvDtLyw
+A6iwCv1AQQm1dR1e8lRv3A
+2OL1bCYeRbeHPuIO-vypWg
+M19VwN5EQ8mpYtwmV41EnQ
+78Noo8I8T7yOr3CU2Jyc_w

@@ -71,6 +71,7 @@ def extract_processing_archive(archive_path: Path) -> dict[str, Any] | None:
         activity: dict[str, Any] = {
             "step_index": len(activities),
             "type": step_type,
+            "name": step.get("name"),
             "parameters": parameters,
         }
 
@@ -81,6 +82,10 @@ def extract_processing_archive(archive_path: Path) -> dict[str, Any] | None:
                 acceleration=step.get("acceleration"),
             )
             solution = step.get("solution")
+            if isinstance(solution, list) and solution:
+                solution = next(
+                    (item for item in solution if isinstance(item, dict)), None
+                )
             if isinstance(solution, dict):
                 activity["solution"] = {
                     "reference": solution.get("name"),
@@ -131,6 +136,97 @@ def _element_moles(component: dict[str, Any], element: str) -> float:
         if symbol == element:
             count += int(num) if num else 1
     return float(amount) * count
+
+
+def _formula_element_count(formula: str, element: str) -> int:
+    """Count atoms of ``element`` in a plain chemical formula."""
+    return sum(
+        int(number) if number else 1
+        for symbol, number in re.findall(r"([A-Z][a-z]?)(\d*)", formula)
+        if symbol == element
+    )
+
+
+def _solution_bisi_composition(data: dict[str, Any]) -> dict[str, Any] | None:
+    """Calculate Bi molarity and atomic S:Bi/I:Bi ratios from solution solutes.
+
+    NOMAD's ``calculated_volume`` and ``amount_of_substance`` values are in L
+    and mol, respectively. Prefer the resolved ``solutes`` collection; fall
+    back to fully resolved components when a solution archive lacks solutes.
+    """
+    volume_l = data.get("calculated_volume")
+    if volume_l is None or float(volume_l) <= 0:
+        return None
+
+    solutes = data.get("solutes")
+    source_components = (
+        solutes
+        if isinstance(solutes, list) and solutes
+        else data.get("components", [])
+    )
+    totals = {element: 0.0 for element in ("Bi", "S", "I")}
+    for component in source_components:
+        if not isinstance(component, dict):
+            continue
+        formula = str(
+            (component.get("pure_substance") or {}).get("molecular_formula", "")
+        )
+        amount = component.get("amount_of_substance")
+        if not formula or amount is None:
+            continue
+        for element in totals:
+            totals[element] += float(amount) * _formula_element_count(formula, element)
+
+    bi_moles = totals["Bi"]
+    if bi_moles <= 0:
+        return None
+    return {
+        "bismuth_concentration_mol_l": bi_moles / float(volume_l),
+        "s_to_bi_molar_ratio": totals["S"] / bi_moles,
+        "i_to_bi_molar_ratio": totals["I"] / bi_moles,
+        "solution_volume_l": float(volume_l),
+        "bi_moles": bi_moles,
+        "s_moles": totals["S"],
+        "i_moles": totals["I"],
+    }
+
+
+def _solution_compositions(archive_paths: list[Path]) -> dict[str, dict[str, Any]]:
+    """Map NOMAD Solution archive names to calculated BiSI precursor chemistry."""
+    compositions: dict[str, dict[str, Any]] = {}
+    for archive_path in archive_paths:
+        data = read_archive(archive_path).get("data", {})
+        if "solution.general.Solution" not in str(data.get("m_def", "")):
+            continue
+        name = str(data.get("name", "")).strip()
+        composition = _solution_bisi_composition(data)
+        if name and composition:
+            compositions[name] = composition
+    return compositions
+
+
+def _match_solution_composition(
+    solution_label: str | None,
+    compositions: dict[str, dict[str, Any]],
+) -> tuple[str | None, dict[str, Any] | None]:
+    """Match a process solution label to its exact/prefix NOMAD solution name."""
+    if not solution_label:
+        return None, None
+    label = solution_label.strip()
+    candidates = sorted(compositions, key=len, reverse=True)
+    matched_name = next(
+        (
+            name
+            for name in candidates
+            if label == name or label.startswith(f"{name} ")
+        ),
+        None,
+    )
+    return (
+        (matched_name, compositions[matched_name])
+        if matched_name is not None
+        else (None, None)
+    )
 
 
 def extract_cbc_ratios(archive_paths: list[Path]) -> dict[str, float]:
@@ -271,18 +367,17 @@ def build_synthesis_database(archive_paths: list[Path]) -> dict[str, dict[str, A
             step_type = activity["type"]
             parameters = activity["parameters"]
             if "SpinCoating" in step_type:
+                solution = activity.get("solution") or {}
                 record["spin_coating"].append(
                     {
+                        "step_name": activity.get("name"),
                         "speed_rpm": parameters.get("speed_rpm"),
                         "duration_s": parameters.get("duration_s"),
                         "acceleration": parameters.get("acceleration"),
+                        "solution_name": solution.get("reference"),
+                        "solution_volume_ml": solution.get("volume_ml"),
                     }
                 )
-                if activity.get("solution"):
-                    record["solution_used"] = activity["solution"].get("reference")
-                    record["solution_volume_ml"] = activity["solution"].get(
-                        "volume_ml"
-                    )
             elif "HotplateAnnealing" in step_type or "Annealing" in step_type:
                 bake_key = "soft_bake" if bake_count == 0 else "hard_bake"
                 if bake_count < 2:
@@ -294,15 +389,30 @@ def build_synthesis_database(archive_paths: list[Path]) -> dict[str, dict[str, A
         record["has_annealing"] = bake_count > 0
         record["completeness"] = "complete" if bake_count > 0 else "incomplete"
 
-        for archive_path in grouped_record["archives"]:
-            archive_data = read_archive(archive_path).get("data", {})
-            solutions = archive_data.get("solution", [])
-            if isinstance(solutions, list) and solutions:
-                solution = solutions[0]
-                if isinstance(solution, dict):
-                    record["solution_used_name"] = solution.get("name")
-                    record["solution_volume_ml"] = solution.get("solution_volume")
-                    break
+        spin_solution_steps = [
+            step for step in record["spin_coating"] if step.get("solution_name")
+        ]
+        main_solution_step = next(
+            (
+                step
+                for step in reversed(spin_solution_steps)
+                if "stock solution" in str(step.get("step_name", "")).casefold()
+            ),
+            spin_solution_steps[-1] if spin_solution_steps else None,
+        )
+        seed_solution_step = next(
+            (
+                step
+                for step in spin_solution_steps
+                if "seed" in str(step.get("step_name", "")).casefold()
+            ),
+            spin_solution_steps[0] if spin_solution_steps else None,
+        )
+        if main_solution_step:
+            record["solution_used_name"] = main_solution_step["solution_name"]
+            record["solution_volume_ml"] = main_solution_step.get("solution_volume_ml")
+        if seed_solution_step:
+            record["seed_solution_name"] = seed_solution_step["solution_name"]
 
         synthesis_db[sample_id] = record
 
@@ -313,20 +423,33 @@ def build_synthesis_database(archive_paths: list[Path]) -> dict[str, dict[str, A
             if sample_id in synthesis_db:
                 synthesis_db[sample_id]["selenization"] = parameters
 
-    # Enrich records with literature-relevant process descriptors.
-    cbc_ratios = extract_cbc_ratios(paths)
+    # Enrich records with process timing and precursor-composition descriptors.
     process_meta = extract_process_metadata(paths)
-    mo_coating = extract_mo_coating(paths)
     se_datetimes = extract_selenization_datetimes(paths)
+    solution_compositions = _solution_compositions(paths)
     for sample_id, record in synthesis_db.items():
         meta = process_meta.get(sample_id, {})
-        solution_key = meta.get("solution_key")
-        record["cbc_ratio"] = cbc_ratios.get(solution_key)
         record["n_spin_cycles"] = meta.get("n_spin_cycles", 1)
-        record["mo_coated"] = mo_coating.get(sample_id)
         record["spin_to_se_days"] = _days_between(
             meta.get("spin_datetime"), se_datetimes.get(sample_id)
         )
+        main_name, main_chemistry = _match_solution_composition(
+            record.get("solution_used_name"), solution_compositions
+        )
+        seed_name, seed_chemistry = _match_solution_composition(
+            record.get("seed_solution_name"), solution_compositions
+        )
+        record["solution_chemistry_name"] = main_name
+        if main_chemistry:
+            record.update(main_chemistry)
+        record["seed_solution_chemistry_name"] = seed_name
+        if seed_chemistry:
+            record.update(
+                {
+                    f"seed_{key}": value
+                    for key, value in seed_chemistry.items()
+                }
+            )
 
     return synthesis_db
 
@@ -386,9 +509,26 @@ def build_synthesis_dataframe(
                 "se_pulse_count": selenization.get("se_pulse_count"),
                 "solution_used_name": record.get("solution_used_name"),
                 "solution_volume_ml": record.get("solution_volume_ml"),
-                "cbc_ratio": record.get("cbc_ratio"),
+                "solution_chemistry_name": record.get("solution_chemistry_name"),
+                "bismuth_concentration_mol_l": record.get(
+                    "bismuth_concentration_mol_l"
+                ),
+                "s_to_bi_molar_ratio": record.get("s_to_bi_molar_ratio"),
+                "i_to_bi_molar_ratio": record.get("i_to_bi_molar_ratio"),
+                "seed_solution_name": record.get("seed_solution_name"),
+                "seed_solution_chemistry_name": record.get(
+                    "seed_solution_chemistry_name"
+                ),
+                "seed_bismuth_concentration_mol_l": record.get(
+                    "seed_bismuth_concentration_mol_l"
+                ),
+                "seed_s_to_bi_molar_ratio": record.get(
+                    "seed_s_to_bi_molar_ratio"
+                ),
+                "seed_i_to_bi_molar_ratio": record.get(
+                    "seed_i_to_bi_molar_ratio"
+                ),
                 "n_spin_cycles": record.get("n_spin_cycles", 1),
-                "mo_coated": record.get("mo_coated"),
                 "spin_to_se_days": record.get("spin_to_se_days"),
                 "num_archives": record.get("num_archives", 0),
                 "has_annealing": record.get("has_annealing", False),
@@ -473,7 +613,7 @@ def collect_sample_ids(root: Path) -> set[str]:
 
     INLThinFilmStack entries are the real films; bare INLThinFilm layers and
     archive filenames are not samples. The sample_id is the leading token of the
-    stack name (e.g. "260721D1 BaCuSe" -> "260721D1").
+    stack name (e.g. "sample01 BiSI" -> "sample01").
     """
     sample_ids: set[str] = set()
     for archive_path in iter_archive_files(root):
@@ -509,7 +649,7 @@ def load_synthesis_archives(
 
 
 def fetch_nomad_archives_to_staging(staging_dir: Path) -> list[Path]:
-    """Download all entry archives from the configured BaCuSe uploads to staging.
+    """Download all entry archives from the configured BiSI uploads to staging.
 
     The saved *.archive.json files are laid out per upload_id so the existing
     local extraction path (load_synthesis_archives) can consume them unchanged.
@@ -527,6 +667,6 @@ def fetch_nomad_archives_to_staging(staging_dir: Path) -> list[Path]:
 
 
 def load_synthesis_from_nomad(staging_dir: Path) -> dict[str, dict[str, Any]]:
-    """Fetch BaCuSe archives from the NOMAD API into staging, then extract them."""
+    """Fetch BiSI archives from the NOMAD API into staging, then extract them."""
     fetch_nomad_archives_to_staging(staging_dir)
     return load_synthesis_archives(staging_dir)

@@ -1,0 +1,34 @@
+sample_id,status,message,rwp,rp,rexp,gof,chi2,point_count,omega_deg,phase_count,phase_labels,diagnostic_codes,fit_plot,warning_geometry
+260408A1,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260408A2,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260408A3,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260408A4,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260408A5,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260408A6,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260413A10,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260413A7,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260413A8,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260413A9,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B1,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B2,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B3,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B4,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B5,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260423B6,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260508D1,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260609B3,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260609B4,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260609B5,skipped_metadata,No exact GIXRD archive-array match,,,,,,,,,,,,
+260430C1,converged,,0.2017173028652188,0.1445587604666109,0.16372718037677841,1.2320330833342108,1.5179055184300023,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;HIGH_CORRELATION;HIGH_CORRELATION;HIGH_CORRELATION;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260430C1_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260430C2,converged,,0.2334615118853667,0.1689445074806551,0.12571575745274685,1.8570584675760997,3.448666151996091,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260430C2_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260528G4,converged,,0.1390388516487654,0.10420386218508708,0.1182528407862198,1.1757759959451886,1.3824491926408997,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260528G4_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260529G5,converged,,0.1842635553000309,0.13470421488289855,0.12076526506114475,1.5257992867960526,2.328063463587343,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;RESOLUTION_NOT_POSITIVE;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260529G5_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260529G6,converged,,0.15268692425185124,0.10901621709161403,0.11773387271596533,1.2968818635585924,1.6819025680272075,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260529G6_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260529G7,converged,,0.2218199822413812,0.15681206325826083,0.13958866241396234,1.5890974123926678,2.525230586073073,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;PATTERN_UNDERSAMPLED;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260529G7_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609A1,converged,,0.2177960957982211,0.1506714827491829,0.11912679483069594,1.8282712643092165,3.3425758158988206,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609A1_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609A2,converged,,0.2106138986338228,0.14636354814602645,0.11775552419864636,1.788569156879044,3.198979628939015,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609A2_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609A3,converged,,0.19387252387992066,0.1377691883297712,0.12136325690248381,1.5974565023061182,2.551867276760097,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609A3_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609A4,converged,,0.20132338650317638,0.1381644760612061,0.11728874141469683,1.7164766547486339,2.946292106297061,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609A4_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609A5,converged,,0.2375950143884759,0.15960393375571927,0.11256177564047391,2.1107966095645323,4.455462326949126,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609A5_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609B1,converged,,0.20871672142728118,0.1502062691427079,0.12006352307299288,1.7383857818364317,3.021985126491062,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;CONSTRAINT_ACTIVE;PEAK_WIDTH_LAW_MISMATCH;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609B1_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry
+260609B2,converged,,0.17740538003263429,0.12627699792688912,0.11195734481750828,1.584580094515523,2.510894075934824,2500.0,0.3,5.0,BiSI;BiOI;Bi₂O₃;Bi₂S₃;BiI₃,SPECIES_FALLBACK_NEUTRAL;HIGH_CORRELATION;CONSTRAINT_ACTIVE;LEBAIL_ALTERNATION_STOPPED,outputs/rietx_lebail_bisi/260609B2_lebail_fit.png,Bragg-Brentano proxy; rietx has no fixed-incidence GIXRD geometry

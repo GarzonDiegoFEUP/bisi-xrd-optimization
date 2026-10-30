@@ -20,8 +20,7 @@ from .config import (
     XRD_PARAMETER_COLUMNS,
 )
 
-# Selenium pulse knobs available for optimization (se_pulse_count is collinear
-# with selenization_time_s and is intentionally excluded).
+# Optional legacy pulse knob; BiSI's current upload has no pulse recipes.
 PULSE_PARAMETER_COLUMNS = (SE_PULSE_DUTY_CYCLE_COLUMN,)
 
 # Process descriptors retained from the synthesis table for exploration.
@@ -29,13 +28,18 @@ PROCESS_MERGE_COLUMNS = (
     "se_pulse_on_ms",
     "se_pulse_off_ms",
     "se_pulse_count",
-    "cbc_ratio",
+    "bismuth_concentration_mol_l",
+    "s_to_bi_molar_ratio",
+    "i_to_bi_molar_ratio",
     "n_spin_cycles",
-    "mo_coated",
     "spin_to_se_days",
 )
-# CBC ratio is the only selected process input; the day gap remains metadata.
-PROCESS_BO_COLUMNS = ("cbc_ratio",)
+# The BiSI composition inputs are stored directly in the synthesis table.
+PROCESS_BO_COLUMNS = (
+    "bismuth_concentration_mol_l",
+    "s_to_bi_molar_ratio",
+    "i_to_bi_molar_ratio",
+)
 
 
 def _pulse_duty_cycle(on_ms: object, off_ms: object) -> float | None:
@@ -77,8 +81,8 @@ def prepare_optimization_data(
     assignment. Without diagnostics, the base objective is used unchanged.
 
     When include_pulse / include_process is True, the synthesis table is merged
-    in (keyed on sample_id). Pulse on/off values become one continuous duty
-    cycle at a fixed period, and CBC ratio is the only other process input.
+    in (keyed on sample_id). Legacy pulse timing remains optional; the process
+    inputs are Bi concentration and atomic S:Bi and I:Bi precursor ratios.
     """
     if not 0.0 <= unassigned_area_penalty_lambda <= 1.0:
         raise ValueError("unassigned_area_penalty_lambda must be between 0 and 1")
@@ -90,7 +94,14 @@ def prepare_optimization_data(
             raise ValueError(
                 "se_pulse_count is collinear with selenization_time_s; exclude it"
             )
-        merge_cols = ["sample_id", *PROCESS_MERGE_COLUMNS]
+        merge_cols = [
+            "sample_id",
+            *(
+                column
+                for column in PROCESS_MERGE_COLUMNS
+                if column not in metrics.columns
+            ),
+        ]
         merged = synthesis[
             [c for c in merge_cols if c in synthesis.columns]
         ].drop_duplicates("sample_id")
@@ -279,7 +290,7 @@ def suggest_next_conditions(
 
 def save_suggestions(
     suggestions: pd.DataFrame,
-    path: Path = RESULTS_DATA_DIR / "bacuse2_bo_suggestions.csv",
+    path: Path = RESULTS_DATA_DIR / "bisi_bo_suggestions.csv",
 ) -> Path:
     """Write suggested synthesis conditions to CSV and return the output path."""
     path.parent.mkdir(parents=True, exist_ok=True)

@@ -1,1 +1,1 @@
-"""BaCuSe2 thin-film XRD analysis and Bayesian optimization package."""
+"""BiSI thin-film synthesis-data extraction and XRD optimization package."""

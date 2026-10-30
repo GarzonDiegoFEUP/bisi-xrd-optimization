@@ -23,11 +23,11 @@ def read_archive(path: Path) -> dict[str, Any]:
     return archive
 
 
-def discover_bacuse_uploads(
+def discover_bisi_uploads(
     root: Path,
-    keywords: tuple[str, ...] = ("bacuse", "bacu2se2", "cu2se"),
+    keywords: tuple[str, ...] = ("bisi", "bismuth iodide sulfide"),
 ) -> dict[str, dict[str, Any]]:
-    """Find NOMAD upload folders containing archive names that mention BaCuSe."""
+    """Find NOMAD upload folders containing archive names that mention BiSI."""
     uploads: dict[str, dict[str, Any]] = defaultdict(
         lambda: {"count": 0, "sample_names": set()}
     )
