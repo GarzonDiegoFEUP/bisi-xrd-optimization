@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+xrd_bo_env/
+.volumes/
+.ipynb_checkpoints/
+**/.gitkeep
+
+# Local secrets (NOMAD API token)
+.env
+
+# Local cache of NOMAD archives (re-downloadable via notebook 1)
+data/raw/nomad_staging/
