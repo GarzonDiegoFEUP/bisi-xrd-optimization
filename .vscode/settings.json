@@ -3,6 +3,18 @@
         "/^xrd_bo_env/bin/python scripts/rietx_lebail_trial\\.py$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^/home/nomad-lanasc/bisi-xrd-optimization/\\.venv/bin/python -c \"import pandas as pd; p='data/processed/bisi_synthesis_database_nomad\\.csv'; d=pd\\.read_csv\\(p\\); cols=\\['spin_speed_rpm','soft_bake_temp_c','hard_bake_temp_c','bismuth_concentration_mol_l','s_to_bi_molar_ratio','i_to_bi_molar_ratio','seed_bismuth_concentration_mol_l','seed_s_to_bi_molar_ratio','seed_i_to_bi_molar_ratio'\\]; print\\('rows',len\\(d\\)\\); print\\(d\\[cols\\]\\.agg\\(\\['count','nunique','min','max'\\]\\)\\.T\\.to_string\\(\\)\\); print\\(d\\[\\['sample_id','solution_used_name','bismuth_concentration_mol_l','s_to_bi_molar_ratio','i_to_bi_molar_ratio'\\]\\]\\.head\\(12\\)\\.to_string\\(index=False\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^/home/nomad-lanasc/bisi-xrd-optimization/\\.venv/bin/python -c \"from pathlib import Path; from xrd_bo_optimization_tf\\.phase_matching import load_reference_cards; from xrd_bo_optimization_tf\\.config import PHASES, REFERENCE_CARD_FILES; refs=load_reference_cards\\(\\); print\\(\\{p:\\{'file':REFERENCE_CARD_FILES\\[p\\],'parsed_peaks':len\\(refs\\[p\\]\\),'positions':refs\\[p\\]\\[:5\\]\\} for p in PHASES\\}\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^/home/nomad-lanasc/bisi-xrd-optimization/\\.venv/bin/python -c \"from pathlib import Path; import rietx as rx; root=Path\\('data/cif_files'\\); names=\\('BiSI','BiOI','Bi2O3','Bi2S3','BiI3'\\);\nfor name in names:\n p=root/f'\\{name\\}\\.cif'; s=rx\\.Structure\\.from_cif\\(p,phase_name=name\\); print\\(name,p\\.exists\\(\\),len\\(s\\.phases\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
